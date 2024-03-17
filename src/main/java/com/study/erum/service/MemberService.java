@@ -1,5 +1,7 @@
 package com.study.erum.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.study.erum.dto.MemberDTO;
@@ -25,6 +27,10 @@ public class MemberService {
 		      return false;
 		    }
 		  }
+
+	public List<MemberDTO> findAll() {
+	    return memberRepository.findAll();
+	}
 	  
 	
 

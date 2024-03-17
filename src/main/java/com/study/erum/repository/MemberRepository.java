@@ -1,5 +1,7 @@
 package com.study.erum.repository;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -23,6 +25,10 @@ public class MemberRepository {
 		
 		return sql.selectOne("Member.login", memberDTO);
 	}
+
+	public List<MemberDTO> findAll() {
+	    return sql.selectList("Member.findAll");
+	  }
 
 	
 	
