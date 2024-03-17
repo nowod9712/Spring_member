@@ -22,55 +22,58 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberController {
 
-	
-	private final MemberService memberService;//*생성자 주입 MemberService로 연결되어 있음.
-	
-	@GetMapping("/save")//보여주는 부분
+	private final MemberService memberService;// *생성자 주입 MemberService로 연결되어 있음.
+
+	@GetMapping("/save") // 보여주는 부분
 	public String saveForm() {
 		return "save";
 	}
-	
-	@PostMapping("/save")//저장하는 부분
+
+	@PostMapping("/save") // 저장하는 부분
 	public String save(@ModelAttribute MemberDTO memberDTO) {
 		int saveResult = memberService.save(memberDTO);
-			if(saveResult > 0) {
-				return "login";
-			}else {
-				return "save";
-			}
+		if (saveResult > 0) {
+			return "login";
+		} else {
+			return "save";
+		}
 	}
-	
-	@GetMapping("/login")//보여주는 부분
+
+	@GetMapping("/login") // 보여주는 부분
 	public String loginForm() {
 		return "login";
 	}
-		 
-	@PostMapping("/login")//저장하는 부분
+
+	@PostMapping("/login") // 저장하는 부분
 	public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
 		boolean loginResult = memberService.login(memberDTO);
-			if(loginResult) {
-				session.setAttribute("loginEmail", memberDTO.getMemberEmail());
-				return "main";
-			}else {
-				return "login";
-			}
+		if (loginResult) {
+			session.setAttribute("loginEmail", memberDTO.getMemberEmail());
+			return "main";
+		} else {
+			return "login";
+		}
 	}
-	
-	  @GetMapping("/")
-	  public String findAll(Model model){
-	    List<MemberDTO> memberDTOList = memberService.findAll();
-	    model.addAttribute("memberList", memberDTOList);
-	    return "list";
-	  }
-	  
+
+	@GetMapping("/")
+	public String findAll(Model model) {
+		List<MemberDTO> memberDTOList = memberService.findAll();
+		model.addAttribute("memberList", memberDTOList);
+		return "list";
+	}
+
 	// /member?id=1
-	  @GetMapping
-	  public String findById(@RequestParam("id") Long id, Model model){
-	    MemberDTO memberDTO = memberService.findById(id);
-	    model.addAttribute("member", memberDTO);
-	    return "detail";
-	  }
-	
-	
-	 
+	@GetMapping
+	public String findById(@RequestParam("id") Long id, Model model) {
+		MemberDTO memberDTO = memberService.findById(id);
+		model.addAttribute("member", memberDTO);
+		return "detail";
+	}
+
+	@GetMapping("/delete")
+	public String delete(@RequestParam("id") Long id) {
+		memberService.delete(id);
+		return "redirect:/member/";
+	}
+
 }

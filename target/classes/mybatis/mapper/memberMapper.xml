@@ -3,9 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Member">
 	<insert id="save" parameterType="member">
-		insert into member_table(memberEmail, memberPassword, memberName, memberAge,
+		insert into
+		member_table(memberEmail, memberPassword, memberName, memberAge,
 		memberMobile)
-		values (#{memberEmail}, #{memberPassword}, #{memberName}, #{memberAge},
+		values (#{memberEmail}, #{memberPassword}, #{memberName},
+		#{memberAge},
 		#{memberMobile})
 	</insert>
 	<!-- 로그인 -->
@@ -13,8 +15,10 @@
 		memberEmail, memberPassword, memberName, memberAge, memberMobile from member_table 
 		where memberEmail=#{memberEmail} and memberPassword=#{memberPassword} </select> -->
 	<select id="login" parameterType="member" resultType="member">
-		select id, memberEmail, memberPassword, memberName, memberAge, memberMobile
-		from member_table where memberEmail=#{memberEmail} and
+		select id,
+		memberEmail, memberPassword, memberName, memberAge, memberMobile
+		from
+		member_table where memberEmail=#{memberEmail} and
 		memberPassword=#{memberPassword}
 	</select>
 
@@ -22,8 +26,13 @@
 		select * from member_table
 	</select>
 
+	<delete id="delete" parameterType="Long">
+		delete from member_table where id = #{id}
+	</delete>
+
 	<select id="findById" parameterType="Long" resultType="member">
-		select * from member_table where id=#{id}
+		select *
+		from member_table where id=#{id}
 	</select>
 
 

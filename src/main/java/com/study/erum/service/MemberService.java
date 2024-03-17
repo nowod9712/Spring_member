@@ -36,4 +36,8 @@ public class MemberService {
 		return memberRepository.findById(id);
 	}
 
+	public void delete(Long id) {
+		memberRepository.delete(id);
+	}
+
 }
