@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.study.erum.dto.MemberDTO;
 import com.study.erum.service.MemberService;
@@ -60,6 +61,14 @@ public class MemberController {
 	    List<MemberDTO> memberDTOList = memberService.findAll();
 	    model.addAttribute("memberList", memberDTOList);
 	    return "list";
+	  }
+	  
+	// /member?id=1
+	  @GetMapping
+	  public String findById(@RequestParam("id") Long id, Model model){
+	    MemberDTO memberDTO = memberService.findById(id);
+	    model.addAttribute("member", memberDTO);
+	    return "detail";
 	  }
 	
 	

@@ -13,25 +13,27 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberService {
 
-	private final MemberRepository memberRepository;//생성자 주입
-	
+	private final MemberRepository memberRepository;// 생성자 주입
+
 	public int save(MemberDTO memberDTO) {
 		return memberRepository.save(memberDTO);
 	}
 
 	public boolean login(MemberDTO memberDTO) {
-		    MemberDTO loginMember = memberRepository.login(memberDTO);
-		    if(loginMember != null){
-		      return true;
-		    }else{
-		      return false;
-		    }
-		  }
+		MemberDTO loginMember = memberRepository.login(memberDTO);
+		if (loginMember != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	public List<MemberDTO> findAll() {
-	    return memberRepository.findAll();
+		return memberRepository.findAll();
 	}
-	  
-	
+
+	public MemberDTO findById(Long id) {
+		return memberRepository.findById(id);
+	}
 
 }
