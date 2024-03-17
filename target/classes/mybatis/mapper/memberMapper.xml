@@ -27,7 +27,8 @@
 	</select>
 
 	<delete id="delete" parameterType="Long">
-		delete from member_table where id = #{id}
+		delete from member_table where
+		id = #{id}
 	</delete>
 
 	<select id="findById" parameterType="Long" resultType="member">
@@ -35,5 +36,18 @@
 		from member_table where id=#{id}
 	</select>
 
+	<select id="findByMemberEmail" parameterType="String"
+		resultType="member">
+		select id, memberEmail, memberPassword, memberName,
+		memberAge, memberMobile
+		from member_table where memberEmail =
+		#{loginEmail}
+	</select>
+
+	<update id="update" parameterType="member">
+		update member_table set memberAge=#{memberAge},
+		memberMobile=#{memberMobile}
+		where id=#{id}
+	</update>
 
 </mapper>
