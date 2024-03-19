@@ -7,6 +7,7 @@
 - open JDK 11
 - MYSQL
 - mybatis
+- JDBC
 - Tomcat 9
 
 # :computer: 기능구성
